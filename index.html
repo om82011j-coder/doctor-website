@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmileCare Dental Clinic - Your Perfect Smile Starts Here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-teal: #0D9488;
+            --primary-teal-dark: #0F766E;
+            --secondary-teal: #5EEAD4;
+            --soft-blue: #E0F2FE;
+            --clean-white: #FFFFFF;
+            --off-white: #F8FAFC;
+            --dark-text: #1E293B;
+            --medium-text: #475569;
+            --light-text: #94A3B8;
+            --border-color: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--dark-text);
+            background: var(--clean-white);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--clean-white);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-teal));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-teal);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-teal);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .phone-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--medium-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .phone-link:hover {
+            color: var(--primary-teal);
+            transform: scale(1.02);
+        }
+
+        .phone-link svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary-teal);
+        }
+
+        .btn-primary {
+            background: var(--primary-teal);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-teal-dark);
+            transform: scale(1.02);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--dark-text);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--clean-white);
+            z-index: 1001;
+            padding: 80px 24px 24px;
+            transition: right 0.3s ease;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--dark-text);
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .mobile-nav-link {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--primary-teal);
+        }
+
+        .mobile-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 16px;
+            padding: 12px 0;
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--soft-blue) 50%, #F0FDFA 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: var(--dark-text);
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .hero-headline span {
+            color: var(--primary-teal);
+        }
+
+        .hero-subheadline {
+            font-size: 18px;
+            color: var(--medium-text);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-teal);
+            color: var(--primary-teal);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-teal);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: -40px;
+            right: 0;
+            background: var(--clean-white);
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 10px 40px rgba(13, 148, 136, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .doctor-placeholder {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--soft-blue), var(--secondary-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .doctor-placeholder svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-teal);
+        }
+
+        .floating-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .floating-card-label {
+            font-size: 12px;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .floating-card-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-teal);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-illustration {
+            width: 100%;
+            max-width: 500px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            position: relative;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+        }
+
+        .floating-icon {
+            position: absolute;
+            background: var(--clean-white);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 2s;
+        }
+
+        .floating-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary-teal);
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        /* Treatments Section */
+        .treatments {
+            background: var(--off-white);
+            padding: 100px 0;
+        }
+
+        .treatments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .treatments-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .treatments-view-all {
+            color: var(--primary-teal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .treatments-view-all::after {
+            content: ' →';
+            transition: transform 0.3s ease;
+        }
+
+        .treatments-view-all:hover::after {
+            transform: translateX(4px);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--clean-white);
+            border-radius: 16px;
+            padding: 32px 28px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(13, 148, 136, 0.12);
+            border-color: var(--secondary-teal);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--soft-blue), #CCFBF1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--primary-teal);
+        }
+
+        .service-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 12px;
+        }
+
+        .service-description {
+            font-size: 15px;
+            color: var(--medium-text);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .service-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-teal);
+        }
+
+        .service-visits {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--medium-text);
+            background: var(--soft-blue);
+            padding: 6px 12px;
+            border-radius: 20px;
+        }
+
+        /* Statistics Banner */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--primary-teal) 0%, var(--primary-teal-dark) 100%);
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+        }
+
+        /* Doctor Profile Section */
+        .doctor-section {
+            background: var(--clean-white);
+            padding: 100px 0;
+        }
+
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .doctor-image {
+            position: relative;
+        }
+
+        .doctor-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: linear-gradient(135deg, var(--soft-blue) 0%, var(--secondary-teal) 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .doctor-placeholder svg {
+            width: 120px;
+            height: 120px;
+            fill: var(--primary-teal);
+            opacity: 0.5;
+        }
+
+        .doctor-image-accent {
+            position: absolute;
+            top: 20px;
+            right: -20px;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--primary-teal);
+            border-radius: 24px;
+            z-index: 0;
+        }
+
+        .doctor-info {
+            padding-top: 20px;
+        }
+
+        .doctor-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+
+        .doctor-qualification {
+            font-size: 16px;
+            color: var(--primary-teal);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .doctor-quote {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--primary-teal);
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 32px;
+            height: 32px;
+            fill: var(--primary-teal);
+            opacity: 0.3;
+        }
+
+        .doctor-quote p {
+            font-size: 17px;
+            color: var(--medium-text);
+            line-height: 1.7;
+            font-style: italic;
+            padding-left: 20px;
+        }
+
+        .clinic-details-card {
+            background: var(--clean-white);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .clinic-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .clinic-hours {
+            margin-bottom: 20px;
+        }
+
+        .clinic-hour-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .clinic-hour-row:last-child {
+            border-bottom: none;
+        }
+
+        .clinic-day {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .clinic-time {
+            color: var(--medium-text);
+            font-size: 14px;
+        }
+
+        .clinic-address {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--soft-blue);
+            border-radius: 12px;
+        }
+
+        .clinic-address svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-teal);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .clinic-address span {
+            font-size: 14px;
+            color: var(--medium-text);
+            line-height: 1.5;
+        }
+
+        .clinic-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .clinic-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        .clinic-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .clinic-btn:hover {
+            background: var(--primary-teal-dark);
+            transform: translateY(-2px);
+        }
+
+        .clinic-btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-teal);
+            color: var(--primary-teal);
+        }
+
+        .clinic-btn-outline:hover {
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        /* Trust Badges Strip */
+        .trust-badges {
+            background: var(--clean-white);
+            padding: 32px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .trust-badges-inner {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.12);
+        }
+
+        .trust-badge-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-teal));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .trust-badge-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .trust-badge-text {
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 15px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .doctor-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .doctor-image {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .stat-number {
+                font-size: 40px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .treatments-title {
+                font-size: 36px;
+            }
+
+            .treatments {
+                padding: 80px 0;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-headline {
+                font-size: 44px;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .floating-card {
+                position: relative;
+                bottom: auto;
+                margin-top: 40px;
+                display: inline-flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .treatments {
+                padding: 60px 0;
+            }
+
+            .treatments-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .treatments-title {
+                font-size: 28px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .service-card {
+                padding: 24px;
+            }
+
+            .service-meta {
+                padding-top: 16px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+
+            .stat-item {
+                padding: 20px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .stat-label {
+                font-size: 13px;
+            }
+
+            .doctor-section {
+                padding: 60px 0;
+            }
+
+            .doctor-name {
+                font-size: 28px;
+            }
+
+            .doctor-quote p {
+                font-size: 15px;
+            }
+
+            .clinic-actions {
+                flex-direction: column;
+            }
+
+            .header {
+                height: 70px;
+            }
+
+            .nav, .header-right {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+                min-height: auto;
+            }
+
+            .hero-headline {
+                font-size: 36px;
+            }
+
+            .hero-subheadline {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .trust-badges-inner {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .trust-badge {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    /* Contact Section */
+        .contact-section {
+            background: var(--off-white);
+            padding: 100px 0;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .contact-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 16px;
+        }
+
+        .contact-header p {
+            font-size: 18px;
+            color: var(--medium-text);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(13, 148, 136, 0.15);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        .contact-form-container {
+            background: var(--clean-white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            font-size: 15px;
+            color: var(--medium-text);
+            margin-bottom: 32px;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-text);
+            margin-bottom: 8px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--off-white);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            background: var(--clean-white);
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary-teal);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-submit-btn:hover {
+            background: var(--primary-teal-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.3);
+        }
+
+        .form-submit-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Talk to Us Section */
+        .talk-section {
+            background: var(--clean-white);
+            padding: 80px 0;
+        }
+
+        .talk-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .talk-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark-text);
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .contact-card {
+            background: var(--off-white);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-teal);
+            box-shadow: 0 20px 50px rgba(13, 148, 136, 0.12);
+        }
+
+        .contact-card-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-teal));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .contact-card-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .contact-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 12px;
+        }
+
+        .contact-card p {
+            font-size: 15px;
+            color: var(--medium-text);
+            margin-bottom: 16px;
+        }
+
+        .contact-card a {
+            display: inline-block;
+            color: var(--primary-teal);
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-teal-dark);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-text);
+            padding: 60px 0 30px;
+            color: white;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 60px 0;
+            }
+
+            .contact-header h2 {
+                font-size: 28px;
+            }
+
+            .contact-cards {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .talk-header h2 {
+                font-size: 28px;
+            }
+
+            .contact-form-container {
+                padding: 28px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer {
+                padding: 40px 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 8.5 9 10.5 12 12.5C15 10.5 16.5 8.5 16.5 6.5C16.5 4 14.5 2 12 2ZM12 14C9 14 6 16 6 19V21H18V19C18 16 15 14 12 14Z"/>
+                    </svg>
+                </div>
+                SmileCare
+            </a>
+
+            <nav class="nav">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Services</a>
+                <a href="#" class="nav-link">Doctors</a>
+                <a href="#" class="nav-link">Reviews</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-right">
+                <a href="tel:+1234567890" class="phone-link">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.161 15.161 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.56 3.45c-.18-.14-.35-.31-.48-.5l-1.5 1.5c.16.13.34.25.52.37.47.33 1.05.68 1.73.98.68.3 1.41.56 2.18.78.25.07.51.13.77.18l1.5-1.5c-.21-.24-.39-.5-.54-.78-1.2-2.16-1.44-4.58-.7-6.9l1.9-1.9c.64-.64 1.5-1 2.42-1s1.78.36 2.42 1l1.9 1.9c1.2-1.17 2.6-1.5 4-.83.58.28 1.13.65 1.64 1.1l-1.5 1.5c-.35.35-.6.77-.74 1.23.73.94 1.2 2.05 1.35 3.24.04.31.06.62.06.94 0 1.96-.56 3.78-1.57 5.26l-1.9-1.9c.6-.77 1.02-1.65 1.24-2.6.07-.3.11-.61.11-.93 0-1.06-.38-2.06-1.06-2.81l-1.5 1.5c.33.43.55.96.61 1.53z"/>
+                    </svg>
+                    (123) 456-7890
+                </a>
+                <a href="#" class="btn-primary">Book Appointment</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link">Home</a>
+            <a href="#" class="mobile-nav-link">Services</a>
+            <a href="#" class="mobile-nav-link">Doctors</a>
+            <a href="#" class="mobile-nav-link">Reviews</a>
+            <a href="#" class="mobile-nav-link">Contact</a>
+            <a href="tel:+1234567890" class="mobile-phone">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.161 15.161 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.56 3.45c-.18-.14-.35-.31-.48-.5l-1.5 1.5c.16.13.34.25.52.37.47.33 1.05.68 1.73.98.68.3 1.41.56 2.18.78.25.07.51.13.77.18l1.5-1.5c-.21-.24-.39-.5-.54-.78-1.2-2.16-1.44-4.58-.7-6.9l1.9-1.9c.64-.64 1.5-1 2.42-1s1.78.36 2.42 1l1.9 1.9c1.2-1.17 2.6-1.5 4-.83.58.28 1.13.65 1.64 1.1l-1.5 1.5c-.35.35-.6.77-.74 1.23.73.94 1.2 2.05 1.35 3.24.04.31.06.62.06.94 0 1.96-.56 3.78-1.57 5.26l-1.9-1.9c.6-.77 1.02-1.65 1.24-2.6.07-.3.11-.61.11-.93 0-1.06-.38-2.06-1.06-2.81l-1.5 1.5c.33.43.55.96.61 1.53z"/>
+                </svg>
+                (123) 456-7890
+            </a>
+        </nav>
+        <a href="#" class="btn-primary" style="margin-top: 24px; display: block; text-align: center;">Book Appointment</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <h1 class="hero-headline">Your Perfect <span>Smile</span> Starts Here</h1>
+                    <p class="hero-subheadline">Budget-friendly, advanced dental care for the whole family. Modern technology meets compassionate service.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary">Book an Appointment</a>
+                        <a href="#" class="btn-secondary">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            Get Directions
+                        </a>
+                    </div>
+                    <div class="floating-card">
+                        <div class="doctor-placeholder">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <div class="floating-card-content">
+                            <span class="floating-card-label">Next Available Slot</span>
+                            <span class="floating-card-time">Today at 11:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-illustration"></div>
+                    <div class="floating-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 8.5 9 10.5 12 12.5C15 10.5 16.5 8.5 16.5 6.5C16.5 4 14.5 2 12 2Z"/>
+                        </svg>
+                    </div>
+                    <div class="floating-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Treatments Section -->
+    <section class="treatments">
+        <div class="container">
+            <div class="treatments-header">
+                <h2 class="treatments-title">Everything under one roof</h2>
+                <a href="#" class="treatments-view-all">View all 18 services</a>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.5 2 5.5 3.5 3.5 6C1.5 8.5 2 12 4 14C4.5 14.5 5 15 5.5 15.5C4.5 16.5 4 18 4 20C4 21 5 22 6 22C7 22 8 21 8 20C8 18.5 9 17 10 16C10.5 15.5 11 15 12 15C13 15 13.5 15.5 14 16C15 17 16 18.5 16 20C16 21 17 22 18 22C19 22 20 21 20 20C20 18 19.5 16.5 18.5 15.5C19 15 19.5 14.5 20 14C22 12 22.5 8.5 20.5 6C18.5 3.5 15.5 2 12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Root Canal</h3>
+                    <p class="service-description">Save your natural tooth with our painless root canal treatment using advanced rotary endodontics.</p>
+                    <div class="service-meta">
+                        <span class="service-price">From $150</span>
+                        <span class="service-visits">2 visits</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 8.5 9 10.5 12 12.5C15 10.5 16.5 8.5 16.5 6.5C16.5 4 14.5 2 12 2Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Dental Implants</h3>
+                    <p class="service-description">Permanent tooth replacement with titanium implants that look and feel like natural teeth.</p>
+                    <div class="service-meta">
+                        <span class="service-price">From $1,200</span>
+                        <span class="service-visits">4-5 visits</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 12.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Dental Crowns</h3>
+                    <p class="service-description">Custom-made porcelain crowns to restore damaged teeth and enhance your smile aesthetics.</p>
+                    <div class="service-meta">
+                        <span class="service-price">From $400</span>
+                        <span class="service-visits">2 visits</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Emergency Care</h3>
+                    <p class="service-description">24/7 emergency dental services for severe pain, trauma, or sudden dental issues.</p>
+                    <div class="service-meta">
+                        <span class="service-price">From $75</span>
+                        <span class="service-visits">1 visit</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Regular Checkup</h3>
+                    <p class="service-description">Comprehensive oral examination with digital X-rays and personalized dental care plans.</p>
+                    <div class="service-meta">
+                        <span class="service-price">From $50</span>
+                        <span class="service-visits">45 mins</span>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M9.64 7.64c.23-.5.36-1.05.36-1.64 0-2.21-1.79-4-4-4S2 3.79 2 6s1.79 4 4 4c.59 0 1.14-.13 1.64-.36L10 12l-2.36 2.36C7.14 14.13 6.59 14 6 14c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4c0-.59-.13-1.14-.36-1.64L12 14l7 7h3v-1L9.64 7.64z"/>
+                        </svg>
+                    </div>
+                    <h3 class="service-title">Wisdom Tooth</h3>
+                    <p class="service-description">Safe and comfortable wisdom tooth extraction with modern sedation techniques.</p>
+                    <div class="service-meta">
+                        <span class="service-price">From $200</span>
+                        <span class="service-visits">1 visit</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Banner -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="15000">0</span>
+                    <span class="stat-label">Happy Patients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="4.9">0</span>
+                    <span class="stat-label">Average Google Rating</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="15">0</span>
+                    <span class="stat-label">Years of Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="18">0</span>
+                    <span class="stat-label">Treatments Offered</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Profile Section -->
+    <section class="doctor-section">
+        <div class="container">
+            <div class="doctor-grid">
+                <div class="doctor-image">
+                    <div class="doctor-placeholder">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                    </div>
+                    <div class="doctor-image-accent"></div>
+                </div>
+                <div class="doctor-info">
+                    <h2 class="doctor-name">Dr. Sarah Mitchell</h2>
+                    <p class="doctor-qualification">Lead Dentist, B.D.S., M.D.S.</p>
+                    <blockquote class="doctor-quote">
+                        <svg class="quote-icon" viewBox="0 0 24 24">
+                            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/>
+                        </svg>
+                        <p>My mission is to provide gentle, personalized dental care that transforms smiles and builds lasting relationships with every patient who walks through our doors.</p>
+                    </blockquote>
+                    <div class="clinic-details-card">
+                        <h3 class="clinic-card-title">Clinic Details</h3>
+                        <div class="clinic-hours">
+                            <div class="clinic-hour-row">
+                                <span class="clinic-day">Morning</span>
+                                <span class="clinic-time">9:00 AM - 1:00 PM</span>
+                            </div>
+                            <div class="clinic-hour-row">
+                                <span class="clinic-day">Evening</span>
+                                <span class="clinic-time">2:00 PM - 7:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="clinic-address">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <span>123 Dental Avenue, Suite 101, New York, NY 10001</span>
+                        </div>
+                        <div class="clinic-actions">
+                            <a href="tel:+1234567890" class="clinic-btn">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.161 15.161 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1A11.36 11.36 0 0 1 8.56 3.45c-.18-.14-.35-.31-.48-.5l-1.5 1.5c.16.13.34.25.52.37.47.33 1.05.68 1.73.98.68.3 1.41.56 2.18.78.25.07.51.13.77.18l1.5-1.5c-.21-.24-.39-.5-.54-.78-1.2-2.16-1.44-4.58-.7-6.9l1.9-1.9c.64-.64 1.5-1 2.42-1s1.78.36 2.42 1l1.9 1.9c1.2-1.17 2.6-1.5 4-.83.58.28 1.13.65 1.64 1.1l-1.5 1.5c-.35.35-.6.77-.74 1.23.73.94 1.2 2.05 1.35 3.24.04.31.06.62.06.94 0 1.96-.56 3.78-1.57 5.26l-1.9-1.9c.6-.77 1.02-1.65 1.24-2.6.07-.3.11-.61.11-.93 0-1.06-.38-2.06-1.06-2.81l-1.5 1.5c.33.43.55.96.61 1.53z"/>
+                                </svg>
+                                Call Clinic
+                            </a>
+                            <a href="#" class="clinic-btn clinic-btn-outline">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                                View on Map
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges Strip -->
+    <section class="trust-badges">
+        <div class="container">
+            <div class="trust-badges-inner">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                        </svg>
+                    </div>
+                    <span class="trust-badge-text">100% Sterilized</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+                        </svg>
+                    </div>
+                    <span class="trust-badge-text">Certified Specialists</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                    </div>
+                    <span class="trust-badge-text">4.8★ Google Rating</span>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                        </svg>
+                    </div>
+                    <span class="trust-badge-text">0% EMI Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-header">
+                <h2>Get In Touch</h2>
+                <p>Visit us or reach out for any queries about your dental care</p>
+            </div>
+            <div class="contact-layout">
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.5816!2d73.8566!3d18.4573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDI3JzI5LjciTiA3M8KwNTEnMjUuOCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="SmileCare Dental Clinic Location">
+                    </iframe>
+                </div>
+                <div class="contact-form-container">
+                    <h3 class="form-title">Send Us a Message</h3>
+                    <p class="form-subtitle">Fill out the form below and we'll get back to you shortly</p>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="contactName">Your Name</label>
+                            <input type="text" id="contactName" name="contactName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Phone Number</label>
+                            <input type="tel" id="contactPhone" name="contactPhone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Your Message</label>
+                            <textarea id="contactMessage" name="contactMessage" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit-btn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talk to Us Section -->
+    <section class="talk-section">
+        <div class="container">
+            <div class="talk-header">
+                <h2>Talk to Us</h2>
+            </div>
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>Speak directly with our team for immediate assistance</p>
+                    <a href="tel:+91224675328">+91 224 675 328</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p>Send us your queries and we'll respond within 24 hours</p>
+                    <a href="mailto:info@smilecare.in">info@smilecare.in</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p>Our clinic is located in the heart of Katraj, Pune</p>
+                    <a href="#contact">View on Map</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 8.5 9 10.5 12 12.5C15 10.5 16.5 8.5 16.5 6.5C16.5 4 14.5 2 12 2ZM12 14C9 14 6 16 6 19V21H18V19C18 16 15 14 12 14Z"/>
+                            </svg>
+                        </div>
+                        SmileCare
+                    </a>
+                    <p>Your trusted dental care partner in Katraj, Pune. We provide comprehensive dental services with a focus on patient comfort and satisfaction.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Our Doctors</a></li>
+                        <li><a href="#">Reviews</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Root Canal</a></li>
+                        <li><a href="#">Dental Implants</a></li>
+                        <li><a href="#">Dental Crowns</a></li>
+                        <li><a href="#">Emergency Care</a></li>
+                        <li><a href="#">Checkups</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Hours</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Mon - Sat: 9AM - 7PM</a></li>
+                        <li><a href="#">Sunday: Closed</a></li>
+                        <li><a href="#">Emergency: 24/7</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SmileCare Dental Clinic. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Stats counter animation
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        const target = parseFloat(counter.getAttribute('data-target'));
+                        const isDecimal = target % 1 !== 0;
+                        const duration = 2000;
+                        const start = performance.now();
+
+                        function updateCounter(currentTime) {
+                            const elapsed = currentTime - start;
+                            const progress = Math.min(elapsed / duration, 1);
+                            const easeOut = 1 - Math.pow(1 - progress, 3);
+                            const current = target * easeOut;
+
+                            counter.textContent = isDecimal ? current.toFixed(1) + '★' : Math.floor(current).toLocaleString();
+
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = isDecimal ? target + '★' : target.toLocaleString();
+                            }
+                        }
+
+                        requestAnimationFrame(updateCounter);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsBanner = document.querySelector('.stats-banner');
+        if (statsBanner) {
+            statsObserver.observe(statsBanner);
+        }
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('contactName').value;
+                const phone = document.getElementById('contactPhone').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                alert('Thank you ' + name + '! We have received your message. Our team will contact you at ' + phone + ' shortly.');
+                contactForm.reset();
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
